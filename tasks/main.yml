@@ -1,0 +1,20 @@
+---
+# tasks file for network_policy_role
+- name: ensure the namespace exists
+  kubernetes.core.k8s:
+    name: "{{ ocp_namespace }}"
+    api_version: v1
+    kind: Namespace
+    state: present
+
+- name: apply networkpolicy objects
+  kubernetes.core.k8s:
+    state: present
+    template: "{{ item }}"
+  loop: "{{ network_policy_yml_files }}"
+
+- name: deploy httpd to ensure networkpolicy objects restrict properly
+  kubernetes.core.k8s:
+    state: present
+    template: "{{ item }}"
+  loop: "{{ httpd_yml_files }}"

@@ -1,0 +1,15 @@
+---
+# defaults file for network_policy_role
+## namespace
+ocp_namespace: 'zerotrust'
+
+## webserver config
+httpd_secure_port: 8443
+app_name: 'httpd'
+httpd_yml_files: ['httpddeployment.yml', 'httpdservice.yml']
+
+## network policy objects
+network_policy_yml_files: ['allowfromingress.yml.j2', 'allowsecurehttptraffic.yml', 'defaultdeny.yml.j2']
+
+## matchlabel for ingress traffic (allowsecurehttptraffic policy will only allow secure traffic from pods with the following label)
+match_label: 'zerotrustlabel'

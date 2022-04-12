@@ -1,0 +1,6 @@
+---
+- name: apply networkpolicy objects to restric pod traffic
+  hosts: localhost
+#  remote_user: root
+  roles:
+    - { role: ../../network_policy_role }

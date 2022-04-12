@@ -1,0 +1,18 @@
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: allow-https
+  namespace: "{{ ocp_namespace }}"
+spec:
+  podSelector:
+    matchLabels:
+      deployment: "{{ app_name }}"
+  ingress:
+  - ports:
+    - protocol: TCP
+      port: {{ httpd_secure_port }}
+    from:
+    - podSelector:
+        matchLabels:
+          app: {{ match_label }}
+
